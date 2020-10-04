@@ -333,7 +333,7 @@ func flagFormat(g *protogen.GeneratedFile, fld *protogen.Field, enums map[string
 
 	switch k {
 	case protoreflect.EnumKind:
-		id := g.QualifiedGoIdent(fld.Enum.GoIdent)
+		id := fld.Enum.GoIdent.GoName
 		e, ok := enums[id]
 		if !ok {
 			e = &enum{Enum: fld.Enum}
