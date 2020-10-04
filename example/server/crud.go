@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/NathanBaulch/protoc-gen-cobra/example/pb"
+	"github.com/gutterbacon/protoc-gen-cobra/example/pb"
 )
 
 type CRUD struct {

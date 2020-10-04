@@ -3,9 +3,9 @@
 package pb
 
 import (
-	client "github.com/NathanBaulch/protoc-gen-cobra/client"
-	flag "github.com/NathanBaulch/protoc-gen-cobra/flag"
-	iocodec "github.com/NathanBaulch/protoc-gen-cobra/iocodec"
+	client "github.com/gutterbacon/protoc-gen-cobra/client"
+	flag "github.com/gutterbacon/protoc-gen-cobra/flag"
+	iocodec "github.com/gutterbacon/protoc-gen-cobra/iocodec"
 	proto "github.com/golang/protobuf/proto"
 	cobra "github.com/spf13/cobra"
 	pflag "github.com/spf13/pflag"

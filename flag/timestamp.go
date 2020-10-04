@@ -3,10 +3,11 @@ package flag
 import (
 	"strings"
 
-	"github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/spf13/pflag"
+	//"github.com/golang/protobuf/ptypes/timestamp"
+	timestamp "google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/NathanBaulch/protoc-gen-cobra/ptypes"
+	"github.com/gutterbacon/protoc-gen-cobra/ptypes"
 )
 
 func TimestampVar(fs *pflag.FlagSet, p **timestamp.Timestamp, name, usage string) {

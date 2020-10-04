@@ -3,8 +3,8 @@ package client
 import (
 	"time"
 
-	"github.com/NathanBaulch/protoc-gen-cobra/iocodec"
-	"github.com/NathanBaulch/protoc-gen-cobra/naming"
+	"github.com/gutterbacon/protoc-gen-cobra/iocodec"
+	"github.com/gutterbacon/protoc-gen-cobra/naming"
 )
 
 type Option func(*Config)

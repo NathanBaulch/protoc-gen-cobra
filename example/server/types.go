@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/NathanBaulch/protoc-gen-cobra/example/pb"
+	"github.com/gutterbacon/protoc-gen-cobra/example/pb"
 )
 
 type Types struct {

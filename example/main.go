@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "github.com/NathanBaulch/protoc-gen-cobra/example/cmd"
+import "github.com/gutterbacon/protoc-gen-cobra/example/cmd"
 
 func main() {
 	cmd.Execute()
