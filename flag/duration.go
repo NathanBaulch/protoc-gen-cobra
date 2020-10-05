@@ -3,10 +3,11 @@ package flag
 import (
 	"strings"
 
-	"github.com/golang/protobuf/ptypes/duration"
 	"github.com/spf13/pflag"
+	//"github.com/golang/protobuf/ptypes/duration"
+	duration "google.golang.org/protobuf/types/known/durationpb"
 
-	"github.com/NathanBaulch/protoc-gen-cobra/ptypes"
+	"github.com/getcouragenow/protoc-gen-cobra/ptypes"
 )
 
 func DurationVar(fs *pflag.FlagSet, p **duration.Duration, name, usage string) {

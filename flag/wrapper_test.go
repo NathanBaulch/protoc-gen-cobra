@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/spf13/pflag"
 	"github.com/stretchr/testify/assert"
+	//"github.com/golang/protobuf/ptypes/wrappers"
+	wrappers "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func TestBoolWrapperVar(t *testing.T) {

@@ -4,9 +4,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/golang/protobuf/ptypes/duration"
-	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/durationpb"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -28,17 +25,17 @@ func TestDecodeValue(t *testing.T) {
 		"string":    "abc",
 	}
 	p := &struct {
-		Timestamp *timestamp.Timestamp
-		Duration  *duration.Duration
-		Bool      *wrappers.BoolValue
-		Bytes     *wrappers.BytesValue
-		Double    *wrappers.DoubleValue
-		Float     *wrappers.FloatValue
-		Int32     *wrappers.Int32Value
-		UInt32    *wrappers.UInt32Value
-		Int64     *wrappers.Int64Value
-		UInt64    *wrappers.UInt64Value
-		String    *wrappers.StringValue
+		Timestamp *timestamppb.Timestamp
+		Duration  *durationpb.Duration
+		Bool      *wrapperspb.BoolValue
+		Bytes     *wrapperspb.BytesValue
+		Double    *wrapperspb.DoubleValue
+		Float     *wrapperspb.FloatValue
+		Int32     *wrapperspb.Int32Value
+		UInt32    *wrapperspb.UInt32Value
+		Int64     *wrapperspb.Int64Value
+		UInt64    *wrapperspb.UInt64Value
+		String    *wrapperspb.StringValue
 	}{}
 	assert.NoError(t, decodeValue(v, p))
 	assert.Equal(t, v["timestamp"], p.Timestamp.AsTime())

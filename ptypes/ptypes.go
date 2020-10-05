@@ -4,13 +4,10 @@ import (
 	"encoding/base64"
 	"strings"
 
-	"github.com/golang/protobuf/ptypes/duration"
-	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/spf13/cast"
-	"google.golang.org/protobuf/types/known/durationpb"
-	"google.golang.org/protobuf/types/known/timestamppb"
-	"google.golang.org/protobuf/types/known/wrapperspb"
+	duration "google.golang.org/protobuf/types/known/durationpb"
+	timestamp "google.golang.org/protobuf/types/known/timestamppb"
+	wrappers "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func ToTimestamp(v interface{}) (*timestamp.Timestamp, error) {
@@ -20,7 +17,7 @@ func ToTimestamp(v interface{}) (*timestamp.Timestamp, error) {
 	if t, err := cast.ToTimeE(v); err != nil {
 		return nil, err
 	} else {
-		return timestamppb.New(t), nil
+		return timestamp.New(t), nil
 	}
 }
 
@@ -31,7 +28,7 @@ func ToDuration(v interface{}) (*duration.Duration, error) {
 	if d, err := cast.ToDurationE(v); err != nil {
 		return nil, err
 	} else {
-		return durationpb.New(d), nil
+		return duration.New(d), nil
 	}
 }
 
@@ -42,7 +39,7 @@ func ToDoubleWrapper(v interface{}) (*wrappers.DoubleValue, error) {
 	if d, err := cast.ToFloat64E(v); err != nil {
 		return nil, err
 	} else {
-		return wrapperspb.Double(d), nil
+		return wrappers.Double(d), nil
 	}
 }
 
@@ -53,7 +50,7 @@ func ToFloatWrapper(v interface{}) (*wrappers.FloatValue, error) {
 	if f, err := cast.ToFloat32E(v); err != nil {
 		return nil, err
 	} else {
-		return wrapperspb.Float(f), nil
+		return wrappers.Float(f), nil
 	}
 }
 
@@ -64,7 +61,7 @@ func ToInt64Wrapper(v interface{}) (*wrappers.Int64Value, error) {
 	if i, err := cast.ToInt64E(v); err != nil {
 		return nil, err
 	} else {
-		return wrapperspb.Int64(i), nil
+		return wrappers.Int64(i), nil
 	}
 }
 
@@ -75,7 +72,7 @@ func ToUInt64Wrapper(v interface{}) (*wrappers.UInt64Value, error) {
 	if i, err := cast.ToUint64E(v); err != nil {
 		return nil, err
 	} else {
-		return wrapperspb.UInt64(i), nil
+		return wrappers.UInt64(i), nil
 	}
 }
 
@@ -86,7 +83,7 @@ func ToInt32Wrapper(v interface{}) (*wrappers.Int32Value, error) {
 	if i, err := cast.ToInt32E(v); err != nil {
 		return nil, err
 	} else {
-		return wrapperspb.Int32(i), nil
+		return wrappers.Int32(i), nil
 	}
 }
 
@@ -97,7 +94,7 @@ func ToUInt32Wrapper(v interface{}) (*wrappers.UInt32Value, error) {
 	if i, err := cast.ToUint32E(v); err != nil {
 		return nil, err
 	} else {
-		return wrapperspb.UInt32(i), nil
+		return wrappers.UInt32(i), nil
 	}
 }
 
@@ -108,7 +105,7 @@ func ToBoolWrapper(v interface{}) (*wrappers.BoolValue, error) {
 	if b, err := cast.ToBoolE(v); err != nil {
 		return nil, err
 	} else {
-		return wrapperspb.Bool(b), nil
+		return wrappers.Bool(b), nil
 	}
 }
 
@@ -119,7 +116,7 @@ func ToStringWrapper(v interface{}) (*wrappers.StringValue, error) {
 	if s, err := cast.ToStringE(v); err != nil {
 		return nil, err
 	} else {
-		return wrapperspb.String(s), nil
+		return wrappers.String(s), nil
 	}
 }
 
@@ -128,13 +125,13 @@ func ToBytesWrapper(v interface{}) (*wrappers.BytesValue, error) {
 		return b, nil
 	}
 	if b, ok := v.([]byte); ok {
-		return wrapperspb.Bytes(b), nil
+		return wrappers.Bytes(b), nil
 	}
 	if s, err := cast.ToStringE(v); err != nil {
 		return nil, err
 	} else if v, err := base64.RawStdEncoding.DecodeString(strings.TrimRight(s, "=")); err != nil {
 		return nil, err
 	} else {
-		return wrapperspb.Bytes(v), nil
+		return wrappers.Bytes(v), nil
 	}
 }

@@ -1,19 +1,20 @@
 package iocodec
 
 import (
+	"bytes"
 	"encoding/xml"
 	"errors"
+	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
+	duration "google.golang.org/protobuf/types/known/durationpb"
+	timestamp "google.golang.org/protobuf/types/known/timestamppb"
+	wrappers "google.golang.org/protobuf/types/known/wrapperspb"
 	"io"
 	"reflect"
 
-	"github.com/golang/protobuf/jsonpb"
-	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes/duration"
-	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/NathanBaulch/protoc-gen-cobra/ptypes"
+	"github.com/getcouragenow/protoc-gen-cobra/ptypes"
 )
 
 var NoOp = func(interface{}) error { return nil }
@@ -28,19 +29,28 @@ type (
 func JSONDecoderMaker() DecoderMaker {
 	return func(r io.Reader) Decoder {
 		return func(v interface{}) error {
-			return jsonpb.Unmarshal(r, v.(proto.Message))
+			buf := new(bytes.Buffer)
+			if _, err := buf.ReadFrom(r); err != nil {
+				return err
+			}
+			return protojson.Unmarshal(buf.Bytes(), v.(proto.Message))
 		}
 	}
 }
 
 func JSONEncoderMaker(pretty bool) EncoderMaker {
-	m := &jsonpb.Marshaler{}
+	m := &protojson.MarshalOptions{}
 	if pretty {
 		m.Indent = "  "
 	}
 	return func(w io.Writer) Encoder {
 		return func(v interface{}) error {
-			return m.Marshal(w, v.(proto.Message))
+			res, err := m.Marshal(v.(proto.Message))
+			if err != nil {
+				return err
+			}
+			_, err = w.Write(res)
+			return err
 		}
 	}
 }
