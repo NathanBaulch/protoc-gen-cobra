@@ -52,7 +52,7 @@ func {{.GoName}}ClientCommand(options ...client.Option) *cobra.Command {
 		Funcs(template.FuncMap{"cleanComments": cleanComments}).
 		Parse(serviceTemplateCode))
 	serviceImports = []protogen.GoImportPath{
-		"github.com/gutterbacon/protoc-gen-cobra/client",
+		"github.com/getcouragenow/protoc-gen-cobra/client",
 		"github.com/spf13/cobra",
 	}
 )
@@ -180,9 +180,9 @@ func _{{.Parent.GoName}}{{.GoName}}Command(cfg *client.Config) *cobra.Command {
 
 	methodImports = []protogen.GoImportPath{
 		"google.golang.org/protobuf/proto",
-		"github.com/gutterbacon/protoc-gen-cobra/client",
-		"github.com/gutterbacon/protoc-gen-cobra/flag",
-		"github.com/gutterbacon/protoc-gen-cobra/iocodec",
+		"github.com/getcouragenow/protoc-gen-cobra/client",
+		"github.com/getcouragenow/protoc-gen-cobra/flag",
+		"github.com/getcouragenow/protoc-gen-cobra/iocodec",
 		"github.com/spf13/cobra",
 		"google.golang.org/grpc",
 	}

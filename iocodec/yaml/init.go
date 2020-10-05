@@ -5,8 +5,8 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/gutterbacon/protoc-gen-cobra/client"
-	"github.com/gutterbacon/protoc-gen-cobra/iocodec"
+	"github.com/getcouragenow/protoc-gen-cobra/client"
+	"github.com/getcouragenow/protoc-gen-cobra/iocodec"
 )
 
 func init() {

@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"github.com/gutterbacon/protoc-gen-cobra/example/pb"
+	"github.com/getcouragenow/protoc-gen-cobra/example/pb"
 
-	_ "github.com/gutterbacon/protoc-gen-cobra/auth/jwt"
-	_ "github.com/gutterbacon/protoc-gen-cobra/auth/oauth"
-	_ "github.com/gutterbacon/protoc-gen-cobra/iocodec/yaml"
+	_ "github.com/getcouragenow/protoc-gen-cobra/auth/jwt"
+	_ "github.com/getcouragenow/protoc-gen-cobra/auth/oauth"
+	_ "github.com/getcouragenow/protoc-gen-cobra/iocodec/yaml"
 )
 
 func init() {

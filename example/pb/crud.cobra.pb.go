@@ -3,9 +3,9 @@
 package pb
 
 import (
-	client "github.com/gutterbacon/protoc-gen-cobra/client"
-	flag "github.com/gutterbacon/protoc-gen-cobra/flag"
-	iocodec "github.com/gutterbacon/protoc-gen-cobra/iocodec"
+	client "github.com/getcouragenow/protoc-gen-cobra/client"
+	flag "github.com/getcouragenow/protoc-gen-cobra/flag"
+	iocodec "github.com/getcouragenow/protoc-gen-cobra/iocodec"
 	proto "github.com/golang/protobuf/proto"
 	cobra "github.com/spf13/cobra"
 	grpc "google.golang.org/grpc"
