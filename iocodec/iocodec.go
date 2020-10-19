@@ -4,17 +4,18 @@ import (
 	"bytes"
 	"encoding/xml"
 	"errors"
+	"io"
+	"reflect"
+
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 	duration "google.golang.org/protobuf/types/known/durationpb"
 	timestamp "google.golang.org/protobuf/types/known/timestamppb"
 	wrappers "google.golang.org/protobuf/types/known/wrapperspb"
-	"io"
-	"reflect"
 
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/getcouragenow/protoc-gen-cobra/ptypes"
+	"github.com/NathanBaulch/protoc-gen-cobra/ptypes"
 )
 
 var NoOp = func(interface{}) error { return nil }
