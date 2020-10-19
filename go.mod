@@ -1,4 +1,4 @@
-module github.com/getcouragenow/protoc-gen-cobra
+module github.com/NathanBaulch/protoc-gen-cobra
 
 go 1.15
 
