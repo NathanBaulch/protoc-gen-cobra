@@ -2,7 +2,7 @@
 
 Cobra command line tool generator for Go gRPC.
 
-[![GoDoc](https://godoc.org/github.com/getcouragenow/protoc-gen-cobra?status.svg)](https://godoc.org/github.com/getcouragenow/protoc-gen-cobra)
+[![GoDoc](https://godoc.org/github.com/NathanBaulch/protoc-gen-cobra?status.svg)](https://godoc.org/github.com/NathanBaulch/protoc-gen-cobra)
 
 ### What's this?
 
