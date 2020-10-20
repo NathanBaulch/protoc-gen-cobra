@@ -5,7 +5,7 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/NathanBaulch/protoc-gen-cobra/example/pb"
+	"github.com/getcouragenow/protoc-gen-cobra/example/pb"
 )
 
 type Nested struct {
