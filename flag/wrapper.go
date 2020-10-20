@@ -4,7 +4,7 @@ import (
 	"github.com/spf13/pflag"
 	wrappers "google.golang.org/protobuf/types/known/wrapperspb"
 
-	"github.com/NathanBaulch/protoc-gen-cobra/ptypes"
+	"github.com/getcouragenow/protoc-gen-cobra/ptypes"
 )
 
 func BoolWrapperVar(fs *pflag.FlagSet, p **wrappers.BoolValue, name, usage string) {
