@@ -40,7 +40,7 @@ func {{.GoName}}ClientCommand(options ...client.Option) *cobra.Command {
 		Short: "{{.GoName}} service client",
 		Long: {{.Comments.Leading | cleanComments | printf "%q"}},{{if .Desc.Options.GetDeprecated}}
 		Deprecated: "deprecated",{{end}}
-		Hide: {{.Comments.Trailing | cleanComments | checkHidden}},
+		Hidden: {{.Comments.Leading | checkHidden}},
 	}
 	cfg.BindFlags(cmd.PersistentFlags())
 	cmd.AddCommand({{range .Methods}}
@@ -102,7 +102,7 @@ func _{{.Parent.GoName}}{{.GoName}}Command(cfg *client.Config) *cobra.Command {
 		Short: "{{.GoName}} RPC client",
 		Long: {{.Comments.Leading | cleanComments | printf "%q"}},{{if .Desc.Options.GetDeprecated}}
 		Deprecated: "deprecated",{{end}}
-		Hide: {{.Comments.Trailing | cleanComments | checkHidden}},
+		Hidden: {{.Comments.Leading | checkHidden}},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if cfg.UseEnvVars {
 				if err := flag.SetFlagsFromEnv(cmd.Parent().PersistentFlags(), true, cfg.EnvVarNamer, cfg.EnvVarPrefix, "{{.Parent.GoName}}"); err != nil {
@@ -209,6 +209,7 @@ func genMethod(g *protogen.GeneratedFile, method *protogen.Method, enums map[str
 		Funcs(
 			template.FuncMap{
 				"cleanComments": cleanComments,
+				"checkHidden":   checkHidden,
 				"qualifiedName": g.QualifiedGoIdent,
 			}).
 		Parse(methodTemplateCode))
@@ -559,9 +560,10 @@ func cleanComments(comments protogen.Comments) string {
 	return strings.TrimSpace(string(comments))
 }
 
-func checkHidden(trailing string) string {
-	if strings.Contains(trailing, "hide") {
-		return "true"
+func checkHidden(comments protogen.Comments) bool {
+	trailing := cleanComments(comments)
+	if strings.Contains(trailing, "hide") || strings.Contains(trailing, "hidden") {
+		return true
 	}
-	return "false"
+	return false
 }
