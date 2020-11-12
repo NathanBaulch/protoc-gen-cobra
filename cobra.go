@@ -40,6 +40,7 @@ func {{.GoName}}ClientCommand(options ...client.Option) *cobra.Command {
 		Short: "{{.GoName}} service client",
 		Long: {{.Comments.Leading | cleanComments | printf "%q"}},{{if .Desc.Options.GetDeprecated}}
 		Deprecated: "deprecated",{{end}}
+		Hide: {{.Comments.Trailing | cleanComments | checkHidden}},
 	}
 	cfg.BindFlags(cmd.PersistentFlags())
 	cmd.AddCommand({{range .Methods}}
@@ -49,8 +50,8 @@ func {{.GoName}}ClientCommand(options ...client.Option) *cobra.Command {
 }
 `
 	serviceTemplate = template.Must(template.New("service").
-			Funcs(template.FuncMap{"cleanComments": cleanComments}).
-			Parse(serviceTemplateCode))
+		Funcs(template.FuncMap{"cleanComments": cleanComments, "checkHidden": checkHidden}).
+		Parse(serviceTemplateCode))
 	serviceImports = []protogen.GoImportPath{
 		"github.com/getcouragenow/protoc-gen-cobra/client",
 		"github.com/spf13/cobra",
@@ -101,6 +102,7 @@ func _{{.Parent.GoName}}{{.GoName}}Command(cfg *client.Config) *cobra.Command {
 		Short: "{{.GoName}} RPC client",
 		Long: {{.Comments.Leading | cleanComments | printf "%q"}},{{if .Desc.Options.GetDeprecated}}
 		Deprecated: "deprecated",{{end}}
+		Hide: {{.Comments.Trailing | cleanComments | checkHidden}},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if cfg.UseEnvVars {
 				if err := flag.SetFlagsFromEnv(cmd.Parent().PersistentFlags(), true, cfg.EnvVarNamer, cfg.EnvVarPrefix, "{{.Parent.GoName}}"); err != nil {
@@ -555,4 +557,11 @@ func genEnum(g *protogen.GeneratedFile, enum *enum) error {
 
 func cleanComments(comments protogen.Comments) string {
 	return strings.TrimSpace(string(comments))
+}
+
+func checkHidden(trailing string) string {
+	if strings.Contains(trailing, "hide") {
+		return "true"
+	}
+	return "false"
 }
