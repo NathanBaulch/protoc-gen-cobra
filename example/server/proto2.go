@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/getcouragenow/protoc-gen-cobra/example/pb"
+	"github.com/amplify-cms/protoc-gen-cobra/example/pb"
 )
 
 type Proto2 struct {
