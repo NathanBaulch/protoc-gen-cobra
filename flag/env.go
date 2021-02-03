@@ -8,7 +8,7 @@ import (
 
 	"github.com/spf13/pflag"
 
-	"github.com/getcouragenow/protoc-gen-cobra/naming"
+	"github.com/amplify-cms/protoc-gen-cobra/naming"
 )
 
 func SetFlagsFromEnv(fs *pflag.FlagSet, search bool, namer naming.Namer, prefixes ...string) (err error) {

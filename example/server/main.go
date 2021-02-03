@@ -6,7 +6,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/getcouragenow/protoc-gen-cobra/example/pb"
+	"github.com/amplify-cms/protoc-gen-cobra/example/pb"
 )
 
 func main() {
