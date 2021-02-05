@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "github.com/amplify-cms/protoc-gen-cobra/example/cmd"
+import "go.amplifyedge.org/protoc-gen-cobra/example/cmd"
 
 func main() {
 	cmd.Execute()

@@ -1,4 +1,4 @@
-module github.com/amplify-cms/protoc-gen-cobra
+module go.amplifyedge.org/protoc-gen-cobra
 
 go 1.15
 
