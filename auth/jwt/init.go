@@ -8,8 +8,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/oauth"
 
-	"github.com/amplify-cms/protoc-gen-cobra/client"
-	"github.com/amplify-cms/protoc-gen-cobra/naming"
+	"go.amplifyedge.org/protoc-gen-cobra/client"
+	"go.amplifyedge.org/protoc-gen-cobra/naming"
 )
 
 var Config = &config{}

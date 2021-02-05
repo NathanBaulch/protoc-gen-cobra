@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/amplify-cms/protoc-gen-cobra/example/pb"
+	"go.amplifyedge.org/protoc-gen-cobra/example/pb"
 )
 
 type Timer struct {

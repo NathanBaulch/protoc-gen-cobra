@@ -3,8 +3,8 @@ package client
 import (
 	"time"
 
-	"github.com/amplify-cms/protoc-gen-cobra/iocodec"
-	"github.com/amplify-cms/protoc-gen-cobra/naming"
+	"go.amplifyedge.org/protoc-gen-cobra/iocodec"
+	"go.amplifyedge.org/protoc-gen-cobra/naming"
 )
 
 type Option func(*Config)

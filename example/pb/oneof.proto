@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package example;
+
+option go_package = ".;pb";
+
+service Oneof {
+    rpc Fetch (FetchRequest) returns (FetchResponse);
+    rpc FetchNested (FetchNestedRequest) returns (FetchResponse);
+}
+
+message FetchRequest {
+    oneof choose {
+        string option1 = 1;
+        string option2 = 2;
+        string option3 = 3;
+    }
+}
+
+message FetchNestedRequest {
+    message Outer {
+        message Middle {
+            message Inner {
+                oneof choose {
+                    string option1 = 1;
+                    string option2 = 2;
+                    string option3 = 3;
+                }
+            }
+            Inner l2 = 1;
+        }
+        Middle l1 = 1;
+    }
+    Outer l0 = 1;
+}
+
+message FetchResponse {
+    string value = 1;
+}

@@ -17,8 +17,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
-	"github.com/amplify-cms/protoc-gen-cobra/iocodec"
-	"github.com/amplify-cms/protoc-gen-cobra/naming"
+	"go.amplifyedge.org/protoc-gen-cobra/iocodec"
+	"go.amplifyedge.org/protoc-gen-cobra/naming"
 )
 
 type (

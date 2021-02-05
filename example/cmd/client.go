@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"github.com/amplify-cms/protoc-gen-cobra/example/pb"
+	"go.amplifyedge.org/protoc-gen-cobra/example/pb"
 
-	_ "github.com/amplify-cms/protoc-gen-cobra/auth/jwt"
-	_ "github.com/amplify-cms/protoc-gen-cobra/auth/oauth"
-	_ "github.com/amplify-cms/protoc-gen-cobra/iocodec/yaml"
+	_ "go.amplifyedge.org/protoc-gen-cobra/auth/jwt"
+	_ "go.amplifyedge.org/protoc-gen-cobra/auth/oauth"
+	_ "go.amplifyedge.org/protoc-gen-cobra/iocodec/yaml"
 )
 
 func init() {
@@ -17,4 +17,5 @@ func init() {
 	rootCmd.AddCommand(pb.TypesClientCommand())
 	rootCmd.AddCommand(pb.Proto2ClientCommand())
 	rootCmd.AddCommand(pb.DeprecatedClientCommand())
+	rootCmd.AddCommand(pb.OneofClientCommand())
 }

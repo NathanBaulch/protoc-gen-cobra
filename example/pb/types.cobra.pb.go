@@ -3,9 +3,9 @@
 package pb
 
 import (
-	client "github.com/amplify-cms/protoc-gen-cobra/client"
-	flag "github.com/amplify-cms/protoc-gen-cobra/flag"
-	iocodec "github.com/amplify-cms/protoc-gen-cobra/iocodec"
+	client "go.amplifyedge.org/protoc-gen-cobra/client"
+	flag "go.amplifyedge.org/protoc-gen-cobra/flag"
+	iocodec "go.amplifyedge.org/protoc-gen-cobra/iocodec"
 	proto "github.com/golang/protobuf/proto"
 	cobra "github.com/spf13/cobra"
 	pflag "github.com/spf13/pflag"

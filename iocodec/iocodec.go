@@ -15,7 +15,7 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/amplify-cms/protoc-gen-cobra/ptypes"
+	"go.amplifyedge.org/protoc-gen-cobra/ptypes"
 )
 
 var NoOp = func(interface{}) error { return nil }

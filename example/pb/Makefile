@@ -19,4 +19,4 @@ clean:
 deps:
 	go get google.golang.org/protobuf/cmd/protoc-gen-go
 	go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
-	go get github.com/amplify-cms/protoc-gen-cobra
+	go get go.amplifyedge.org/protoc-gen-cobra

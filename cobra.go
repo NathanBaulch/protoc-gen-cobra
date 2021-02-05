@@ -53,7 +53,7 @@ func {{.GoName}}ClientCommand(options ...client.Option) *cobra.Command {
 		Funcs(template.FuncMap{"cleanComments": cleanComments, "checkHidden": checkHidden}).
 		Parse(serviceTemplateCode))
 	serviceImports = []protogen.GoImportPath{
-		"github.com/amplify-cms/protoc-gen-cobra/client",
+		"go.amplifyedge.org/protoc-gen-cobra/client",
 		"github.com/spf13/cobra",
 	}
 )
@@ -182,9 +182,9 @@ func _{{.Parent.GoName}}{{.GoName}}Command(cfg *client.Config) *cobra.Command {
 
 	methodImports = []protogen.GoImportPath{
 		"google.golang.org/protobuf/proto",
-		"github.com/amplify-cms/protoc-gen-cobra/client",
-		"github.com/amplify-cms/protoc-gen-cobra/flag",
-		"github.com/amplify-cms/protoc-gen-cobra/iocodec",
+		"go.amplifyedge.org/protoc-gen-cobra/client",
+		"go.amplifyedge.org/protoc-gen-cobra/flag",
+		"go.amplifyedge.org/protoc-gen-cobra/iocodec",
 		"github.com/spf13/cobra",
 		"google.golang.org/grpc",
 	}
@@ -259,10 +259,21 @@ func walkFields(g *protogen.GeneratedFile, message *protogen.Message, path []str
 		path := append(path, fld.GoName)
 
 		if f := flagFormat(g, fld, enums); f != "" {
-			goPath := fmt.Sprintf("&%s.%s", target, strings.Join(path[level:], "."))
 			flagName := fmt.Sprintf("cfg.FlagNamer(%q)", strings.Join(path, " "))
 			comment := cleanComments(fld.Comments.Leading)
-			flagLine := fmt.Sprintf(f, goPath, flagName, comment)
+			var flagLine string
+			if fld.Oneof != nil {
+				varName := strings.Join(path, "")
+				goPath := fmt.Sprintf("&%s.%s", varName, fld.GoName)
+				flagLine = fmt.Sprintf("%s := &%s{}\n", varName, fld.GoIdent.GoName)
+				flagLine += fmt.Sprintf(f, goPath, flagName, comment)
+				target := strings.Join(append([]string{target}, path[level:len(path)-1]...), ".")
+				postSetCode := fmt.Sprintf("%s.%s = %s", target, fld.Oneof.GoName, varName)
+				flagLine += fmt.Sprintf("\nflag.WithPostSetHook(cmd.PersistentFlags(), %s, func() { %s })", flagName, postSetCode)
+			} else {
+				goPath := fmt.Sprintf("&%s.%s", target, strings.Join(path[level:], "."))
+				flagLine = fmt.Sprintf(f, goPath, flagName, comment)
+			}
 			if postSetCode != "" {
 				flagLine += fmt.Sprintf("\nflag.WithPostSetHook(cmd.PersistentFlags(), %s, func() { %s })", flagName, postSetCode)
 			}
@@ -299,7 +310,11 @@ func walkFields(g *protogen.GeneratedFile, message *protogen.Message, path []str
 				}
 				if flagCode != "" {
 					if fld.Oneof != nil {
-						flagCode = fmt.Sprintf("%s := %s\n%s", strings.Join(path, ""), initCode, flagCode)
+						flagName := fmt.Sprintf("cfg.FlagNamer(%q)", strings.Join(path, " "))
+						flagLine := fmt.Sprintf("%s := %s\n", strings.Join(path, ""), initCode)
+						flagLine += fmt.Sprintf("cmd.PersistentFlags().Bool(%s, false, \"\")\n", flagName)
+						flagLine += fmt.Sprintf("flag.WithPostSetHook(cmd.PersistentFlags(), %s, func() { %s })\n", flagName, postSetCode)
+						flagCode = flagLine + flagCode
 					}
 					flagLines[fld.Desc.Index()] = flagCode
 				}
@@ -327,7 +342,7 @@ func flagFormat(g *protogen.GeneratedFile, fld *protogen.Field, enums map[string
 			}
 		} else if k == protoreflect.BytesKind {
 			return fmt.Sprintf("flag.%s(cmd.PersistentFlags(), %%s, %%s, %%q)", bt.Value)
-		} else if fld.Desc.HasPresence() {
+		} else if fld.Desc.HasPresence() && fld.Oneof == nil {
 			return fmt.Sprintf("flag.%s(cmd.PersistentFlags(), %%s, %%s, %%q)", bt.Pointer)
 		} else {
 			return fmt.Sprintf("cmd.PersistentFlags().%s(%%s, %%s, %s, %%q)", bt.Value, bt.Default)

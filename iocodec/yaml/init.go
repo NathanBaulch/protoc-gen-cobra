@@ -5,8 +5,8 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/amplify-cms/protoc-gen-cobra/client"
-	"github.com/amplify-cms/protoc-gen-cobra/iocodec"
+	"go.amplifyedge.org/protoc-gen-cobra/client"
+	"go.amplifyedge.org/protoc-gen-cobra/iocodec"
 )
 
 func init() {
