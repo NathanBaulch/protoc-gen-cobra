@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/NathanBaulch/protoc-gen-cobra/example/pb"
+	"go.amplifyedge.org/protoc-gen-cobra/example/pb"
 )
 
 type Oneof struct {
