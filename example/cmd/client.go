@@ -17,4 +17,5 @@ func init() {
 	rootCmd.AddCommand(pb.TypesClientCommand())
 	rootCmd.AddCommand(pb.Proto2ClientCommand())
 	rootCmd.AddCommand(pb.DeprecatedClientCommand())
+	rootCmd.AddCommand(pb.OneofClientCommand())
 }
